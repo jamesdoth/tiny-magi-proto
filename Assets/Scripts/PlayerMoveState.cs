@@ -5,8 +5,6 @@ using UnityEngine.InputSystem.XInput;
 
 public class PlayerMoveState : PlayerState
 {
-    protected int xInput;
-    protected int yInput;
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
     {
     }
@@ -30,14 +28,8 @@ public class PlayerMoveState : PlayerState
     {
         base.LogicUpdate();
 
-        xInput = player.InputHandler.NormInputX;
-        yInput = player.InputHandler.NormInputY;
-        player.SetVelocityX(playerData.movementVelocity * xInput);
-        player.SetVelocityY(playerData.movementVelocity * yInput);
-        if (xInput != 0)
-        {
-            stateMachine.ChangeState(player.MoveState);
-        }
+        Movement?.SetVelocityX(playerData.movementVelocity * xInput);
+        Movement?.SetVelocityY(playerData.movementVelocity * yInput);
     }
 
     public override void PhysicsUpdate()

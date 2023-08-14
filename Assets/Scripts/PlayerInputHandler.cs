@@ -6,6 +6,12 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
+    private PlayerInput playerInput;
+
+    private void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {

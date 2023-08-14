@@ -10,14 +10,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
+    public Core Core { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    private Vector2 workspace;
     public Vector2 CurrentVelocity { get; private set; }
 
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+        if (Core == null)
+        {
+            Debug.LogError("Core component not found!");
+        }
+
+
         StateMachine = new PlayerStateMachine();
+
         MoveState = new PlayerMoveState(this, StateMachine, playerData);
     }
 
@@ -31,26 +39,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        CurrentVelocity = RB.velocity;
+        Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
-    }
-
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
     }
 }
