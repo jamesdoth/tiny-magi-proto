@@ -8,6 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
     public int NormInputY { get; private set; }
     private PlayerInput playerInput;
 
+    private Teleport teleportScript;
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -19,5 +21,22 @@ public class PlayerInputHandler : MonoBehaviour
 
         NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
         NormInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+    }
+
+    public void OnShootInput(InputAction.CallbackContext context)
+    {
+        
+    }
+    public void OnTeleportInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            teleportScript.TeleportToMousePosition();
+        }
+    }
+
+    public bool IsTeleportInput()
+    {
+        return playerInput.actions["Gameplay/Ability"].triggered && playerInput.actions["Gameplay/Ability"].activeControl.name == "e";
     }
 }

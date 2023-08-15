@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,4 +14,4 @@ public static class GenericNotImplementedError<T>
         Debug.LogError(typeof(T) + " not implemented on " + name);
         return default;
     }
-}*/
+}

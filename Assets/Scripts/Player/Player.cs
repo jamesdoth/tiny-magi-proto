@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine {  get; private set; }
     public PlayerMoveState MoveState { get; private set; }
 
+    private Teleport teleportScript;
+
     [SerializeField]
     private PlayerData playerData;
 
@@ -35,12 +37,19 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
 
         StateMachine.Initialize(MoveState);
+
+        teleportScript = GetComponent<Teleport>();
     }
 
     private void Update()
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
+
+        if (InputHandler.IsTeleportInput())
+        {
+            teleportScript.TeleportToMousePosition();
+        }
     }
 
     private void FixedUpdate()

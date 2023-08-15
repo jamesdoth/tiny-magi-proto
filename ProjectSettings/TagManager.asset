@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -40,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 3874699929
+    locked: 0
+  - name: Player
+    uniqueID: 117709439
+    locked: 0
+  - name: Enemy
+    uniqueID: 1765154005
+    locked: 0
+  - name: Projectile
+    uniqueID: 1443652609
     locked: 0
